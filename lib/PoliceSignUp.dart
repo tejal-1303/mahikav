@@ -4,16 +4,14 @@ import 'package:mahikav/components/text_form_field.dart';
 
 import 'components/buttons/filled_buttons.dart';
 
-import 'StudentSignUp.dart';
-
-class LoginSignUp extends StatefulWidget {
-  const LoginSignUp({Key? key}) : super(key: key);
+class StudentSignUp extends StatefulWidget {
+  const StudentSignUp({Key? key}) : super(key: key);
 
   @override
-  State<LoginSignUp> createState() => _LoginSignUpState();
+  State<StudentSignUp> createState() => _StudentSignUp();
 }
 
-class _LoginSignUpState extends State<LoginSignUp> {
+class _StudentSignUp extends State<StudentSignUp> {
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
 
@@ -41,41 +39,34 @@ class _LoginSignUpState extends State<LoginSignUp> {
                       height: 10,
                     ),
                     CustomTextFormField(
+                      label: 'Police ID',
+                      controller: emailCtrl,
+                      hint: 'abc@example.com',
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),CustomTextFormField(
+                      label: 'ID Proof',
+                      controller: emailCtrl,
+                      hint: 'Eg.Aadhar Card, Pan Card etc... ',
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomTextFormField(
                         label: 'Password', controller: passCtrl),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomTextFormField(
+                        label: 'Confirm Password', controller: passCtrl),
                     SizedBox(
                       height: 20,
                     ),
                     CustomFilledButton(
                       onPressed: () {},
-                      label: 'Login',
+                      label: 'Sign Up',
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CupertinoButton(
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Color(0xff27374D),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                    Text(
-                      'or',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-
-                      ),
-                    ),
-                    SizedBox(height: 20,),
-                    CustomOutlineButton(onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => StudentSignUp()));
-                    }, label: 'Create an Account')
                   ],
                 ),
               ),
