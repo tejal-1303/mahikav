@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
+
 class CustomFilledButton extends StatelessWidget {
-  const CustomFilledButton({Key? key, required this.onPressed, required this.label})
+  const CustomFilledButton(
+      {Key? key, required this.onPressed, required this.label})
       : super(key: key);
   final String label;
   final VoidCallback? onPressed;
@@ -10,11 +13,11 @@ class CustomFilledButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       style: FilledButton.styleFrom(
-        backgroundColor: Color(0xff27374D),
+        backgroundColor: kColorDark,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 2,
-            color: Color(0xff27374D),
+            color: kColorDark,
           ),
           borderRadius: BorderRadius.circular(15),
         ),
@@ -32,7 +35,8 @@ class CustomFilledButton extends StatelessWidget {
 }
 
 class CustomOutlineButton extends StatelessWidget {
-  const CustomOutlineButton({Key? key, required this.onPressed, required this.label})
+  const CustomOutlineButton(
+      {Key? key, required this.onPressed, required this.label})
       : super(key: key);
   final String label;
   final VoidCallback? onPressed;
@@ -41,12 +45,9 @@ class CustomOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       style: FilledButton.styleFrom(
-        backgroundColor: Color(0xffDDE6ED),
+        backgroundColor: kColorLight,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xff27374D),
-            width: 2
-          ),
+          side: BorderSide(color: kColorDark, width: 2),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
@@ -55,7 +56,10 @@ class CustomOutlineButton extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Text(
           label,
-          style: TextStyle(fontSize: 18,color: Color(0xff27374D)),
+          style: TextStyle(
+            fontSize: 18,
+            color: kColorDark,
+          ),
         ),
       ),
     );
