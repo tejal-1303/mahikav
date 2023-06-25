@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "649864211385",
+    "project_id": "mahikav",
+    "storage_bucket": "mahikav.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649864211385:android:0a086d60aa09171961e468",
+        "android_client_info": {
+          "package_name": "com.example.mahikav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649864211385-k3p6imv65i119uuc447sjuqjaa57ss5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwB0IMAkLIvN5qKD6Uyc9ccDW46ODNQq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649864211385-k3p6imv65i119uuc447sjuqjaa57ss5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
