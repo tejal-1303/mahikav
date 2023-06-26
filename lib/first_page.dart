@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import 'components/buttons/filled_buttons.dart';
+import 'components/custom_icon_icons.dart';
 import 'login_signup.dart';
 
 class FirstPage extends StatefulWidget {
@@ -17,6 +19,34 @@ class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Colors.red.shade900,
+            child: Icon(
+              CustomIcon.mic,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          FloatingActionButton(
+            backgroundColor: Colors.green,
+            child: Icon(
+              Icons.call,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              await FlutterPhoneDirectCaller.callNumber(
+                  '+917021051913');
+            },
+          ),
+        ],
+      ),
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
