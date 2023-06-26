@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mahikav/components/custom_icon_icons.dart';
 
 import 'components/buttons/filled_buttons.dart';
 import 'components/text_form_field.dart';
@@ -30,7 +31,7 @@ class _AddCollege_AdminState extends State<AddCollege_Admin> {
               height: 20,
             ),
             CustomTextFormField(
-              label: 'City',
+              label: 'College Name',
               controller: collegeName,
             ),
             SizedBox(
