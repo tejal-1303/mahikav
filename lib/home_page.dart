@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mahikav/components/pages/pending_verification.dart';
 
 import 'add_place_admin_func.dart';
 import 'community_topic.dart';
+import 'components/custom_icon_icons.dart';
 import 'constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,6 +26,36 @@ class _HomePageState extends State<HomePage> {
         if (userData.hasData) {
           if (userData.data!['category'] == 'Admin' || !(userData.data!['isVerifiedUser'] ?? false)) {
             return Scaffold(
+              floatingActionButton:
+              userData.hasData && userData.data!['category'] == 'Member'
+                  ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FloatingActionButton(
+                    backgroundColor: Colors.red.shade900,
+                    child: Icon(
+                      CustomIcon.mic,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: Colors.green,
+                    child: Icon(
+                      Icons.call,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      await FlutterPhoneDirectCaller.callNumber(
+                          '+917021051913');
+                    },
+                  ),
+                ],
+              )
+                  : null,
               appBar: AppBar(
                 title: const Text('Communities'),
                 actions: [
