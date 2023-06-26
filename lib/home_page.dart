@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
           firestore.collection('users').doc(auth.currentUser!.uid).snapshots(),
       builder: (context, userData) {
         if (userData.hasData) {
-          if (userData.data!['category'] == 'Admin') {
+          if (userData.data!['category'] == 'Admin' || !(userData.data!['isVerifiedUser'] ?? false)) {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Communities'),

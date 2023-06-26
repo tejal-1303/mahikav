@@ -8,14 +8,14 @@ import 'package:mahikav/home_page.dart';
 import 'components/buttons/filled_buttons.dart';
 import 'constants.dart';
 
-class StudentSignUp extends StatefulWidget {
-  const StudentSignUp({Key? key}) : super(key: key);
+class PoliceSignUp extends StatefulWidget {
+  const PoliceSignUp({Key? key}) : super(key: key);
 
   @override
-  State<StudentSignUp> createState() => _StudentSignUp();
+  State<PoliceSignUp> createState() => _StudentSignUp();
 }
 
-class _StudentSignUp extends State<StudentSignUp> {
+class _StudentSignUp extends State<PoliceSignUp> {
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
   final policeIdCtrl = TextEditingController();

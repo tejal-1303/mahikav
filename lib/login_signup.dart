@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:mahikav/components/text_form_field.dart';
 import 'package:mahikav/home_page.dart';
 
+import 'PoliceSignUp.dart';
 import 'StudentSignUp.dart';
 import 'components/buttons/filled_buttons.dart';
 import 'constants.dart';
 
 class LoginSignUp extends StatefulWidget {
-  const LoginSignUp({Key? key}) : super(key: key);
+  const LoginSignUp({Key? key, required this.isPolice}) : super(key: key);
+  final bool isPolice;
 
   @override
   State<LoginSignUp> createState() => _LoginSignUpState();
@@ -53,6 +55,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
                     CustomTextFormField(
                       label: 'Password',
                       controller: passCtrl,
+                      isPassword: true,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return 'Field is Required';
@@ -116,6 +119,17 @@ class _LoginSignUpState extends State<LoginSignUp> {
                     SizedBox(height: 20),
                     CupertinoButton(
                       child: Text(
+                        'Login with phone number',
+                        style: TextStyle(
+                          color: kColorDark,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      onPressed: () {},
+                    ),SizedBox(height: 20),
+                    CupertinoButton(
+                      child: Text(
                         'Forgot Password?',
                         style: TextStyle(
                           color: kColorDark,
@@ -139,7 +153,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => StudentSignUp(),
+                            builder: (context) => (widget.isPolice)
+                                ? PoliceSignUp()
+                                : StudentSignUp(),
                           ),
                         );
                       },
