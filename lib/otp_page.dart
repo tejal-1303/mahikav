@@ -10,8 +10,13 @@ import 'package:mahikav/home_page.dart';
 import 'constants.dart';
 
 class OTPPage extends StatefulWidget {
-  const OTPPage({Key? key, required this.verificationId}) : super(key: key);
+  const OTPPage({
+    Key? key,
+    required this.verificationId,
+    this.data,
+  }) : super(key: key);
   final String verificationId;
+  final Map<String, dynamic>? data;
 
   @override
   State<OTPPage> createState() => _OTPPageState();
@@ -32,6 +37,11 @@ class _OTPPageState extends State<OTPPage> {
 
   @override
   void initState() {
+    // focusNode[i].dispose();
+    for (int i = 0; i < 6; i++) {
+      // focusNode.add(FocusNode());
+      controllers.add(TextEditingController());
+    }
     // TODO: implement initState
     super.initState();
   }
@@ -147,11 +157,18 @@ class _OTPPageState extends State<OTPPage> {
 
     // Sign the user in (or link) with the credential
     await FirebaseAuth.instance.signInWithCredential(credential);
-    Navigator.pushReplacement(
+    if(widget.data!=null) {
+      await firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .set(widget.data!);
+    }
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (_) => const HomePage(),
       ),
+        (_) => false,
     );
   }
 }

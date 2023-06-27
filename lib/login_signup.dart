@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mahikav/components/text_form_field.dart';
 import 'package:mahikav/home_page.dart';
+import 'package:mahikav/login_with_phone.dart';
 
 import 'PoliceSignUp.dart';
 import 'StudentSignUp.dart';
@@ -126,7 +127,9 @@ class _LoginSignUpState extends State<LoginSignUp> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => LoginWithPhone()));
+                      },
                     ),SizedBox(height: 20),
                     CupertinoButton(
                       child: Text(

@@ -24,7 +24,7 @@ class SendMessageBlob extends StatelessWidget {
   final bool isLast;
   final Size size;
   final bool isRecieved;
-  final String name;
+  final String? name;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SendMessageBlob extends StatelessWidget {
             SizedBox(
               height: isFirst ? 5 : 1,
             ),
-            if (isFirst) const Text('You'),
+            if (isFirst) Text(name ?? ''),
             if (isFirst) const SizedBox(height: 5),
             Material(
               color: isRecieved ? Color(0xffd9d9d9) : kColorDark,

@@ -79,20 +79,20 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 color:
-    // (widget.controller.text.isNotEmpty)
+                    // (widget.controller.text.isNotEmpty)
                     // ?
-                Colors.black,
-                    // : const Color(0xffD8DADC),
+                    Colors.black,
+                // : const Color(0xffD8DADC),
               ),
               borderRadius: BorderRadius.circular(5),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color:
-                // (widget.controller.text.isNotEmpty)
-                //     ?
-                Colors.black,
-                    // : const Color(0xffD8DADC),
+                    // (widget.controller.text.isNotEmpty)
+                    //     ?
+                    Colors.black,
+                // : const Color(0xffD8DADC),
               ),
               borderRadius: BorderRadius.circular(5),
             ),
