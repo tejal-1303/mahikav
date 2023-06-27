@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:mahikav/components/custom_icon_icons.dart';
+import 'package:mahikav/constants.dart';
 
 import 'components/buttons/filled_buttons.dart';
 import 'components/text_form_field.dart';
@@ -43,11 +43,16 @@ class _AddCollege_AdminState extends State<AddCollege_Admin> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(20),
         child: CustomFilledButton(
-          onPressed: () {
-            widget.community.reference.collection('groups').add({
+          onPressed: () async {
+            await widget.community.reference.collection('groups').add({
               'collegeName': collegeName.text,
               'isGeneral': false,
               'updatedAt': Timestamp.now(),
+            });
+            firestore.collection('colleges').add({
+              'collegeAddress': collegeName.text,
+              'state': widget.community['state'],
+              'city': widget.community['city'],
             });
           },
           label: 'Create',

@@ -54,15 +54,11 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                       Navigator.pop(context);
                     },
                     padding: EdgeInsets.all(15),
-                    child: Row(
-                      children: [
-                        Text(
-                          e,
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      e,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   );
                 }).toList(),
@@ -81,16 +77,19 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.controller.text.isEmpty
-                      ? 'Select One'
-                      : widget.controller.text,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: widget.controller.text.isEmpty
-                        ? Colors.grey.shade400
-                        : Colors.black,
+                Flexible(
+                  child: Text(
+                    widget.controller.text.isEmpty
+                        ? 'Select One'
+                        : widget.controller.text,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: widget.controller.text.isEmpty
+                          ? Colors.grey.shade400
+                          : Colors.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Icon(Icons.arrow_drop_down),

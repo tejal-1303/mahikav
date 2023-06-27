@@ -59,12 +59,12 @@ class _GroupChatState extends State<GroupChat> {
                 for (int i = 0; i < data.length; i++) {
                   prevDay = data[i]['timeSent'].toDate().day;
                   print("$day + $prevDay");
-                  if ((i == 0 && today > day) || (i > 0 && day > prevDay)) {
+                  if ((i > 0 && day > prevDay)) {
                     String text = (day == today)
                         ? 'Today'
                         : (day == today - 1)
                             ? 'Yesterday'
-                            : DateFormat.yMd()
+                            : DateFormat.yMEd()
                                 .format(data[i]['timeSent'].toDate());
                     list.add(
                       Padding(
@@ -88,24 +88,37 @@ class _GroupChatState extends State<GroupChat> {
                     StreamBuilder<DocumentSnapshot>(
                       stream: data[i]['sentBy'].snapshots(),
                       builder: (context, person) {
-                        bool isCur =
-                            data[i]['sentBy'].id == auth.currentUser!.uid;
-                        return SendMessageBlob(
-                          size: size,
-                          message: data[i]['message'],
-                          time: data[i]['timeSent'].toDate(),
-                          isFirst: (i < data.length - 1 &&
-                                  (data[i + 1]['sentBy'].id !=
-                                      data[i]['sentBy'].id || data[i]['timeSent'].toDate().day > data[i + 1]['timeSent'].toDate().day)) ||
-                              i == data.length - 1,
-                          isLast: (i > 0 &&
-                                  (data[i]['sentBy'].id !=
-                                      data[i - 1]['sentBy'].id || data[i - 1]['timeSent'].toDate().day > data[i]['timeSent'].toDate().day)) ||
-                              i == 0,
-                          isRecieved: !isCur,
-                          name: isCur ? 'You' : person.data!['name'],
-                        );
-                      },
+                        if (person.hasData) {
+                          bool isCur =
+                              data[i]['sentBy'].id == auth.currentUser!.uid;
+
+                          return SendMessageBlob(
+                            size: size,
+                            message: data[i]['message'],
+                            time: data[i]['timeSent'].toDate(),
+                            isFirst: (i < data.length - 1 &&
+                                (data[i + 1]['sentBy'].id !=
+                                    data[i]['sentBy'].id || data[i]['timeSent']
+                                    .toDate()
+                                    .day > data[i + 1]['timeSent']
+                                    .toDate()
+                                    .day)) ||
+                                i == data.length - 1,
+                            isLast: (i > 0 &&
+                                (data[i]['sentBy'].id !=
+                                    data[i - 1]['sentBy'].id ||
+                                    data[i - 1]['timeSent']
+                                        .toDate()
+                                        .day > data[i]['timeSent']
+                                        .toDate()
+                                        .day)) ||
+                                i == 0,
+                            isRecieved: !isCur,
+                            name: isCur ? 'You' : person.data?['name'],
+                          );
+                        }
+                        return Container();
+                      }
                     ),
                   );
                   day = prevDay;
