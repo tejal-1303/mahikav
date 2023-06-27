@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mahikav/components/buttons/filled_buttons.dart';
 import 'package:mahikav/home_page.dart';
 
 import 'firebase_options.dart';
 import 'first_page.dart';
-import 'login_signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

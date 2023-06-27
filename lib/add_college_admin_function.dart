@@ -59,6 +59,5 @@ class _AddCollege_AdminState extends State<AddCollege_Admin> {
         ),
       ),
     );
-    ;
   }
 }

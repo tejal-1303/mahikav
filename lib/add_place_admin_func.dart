@@ -65,6 +65,5 @@ class _AddPlace_AdminState extends State<AddPlace_Admin> {
         ),
       ),
     );
-    ;
   }
 }
