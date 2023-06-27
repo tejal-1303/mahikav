@@ -53,7 +53,7 @@ class _GroupTileState extends State<GroupTile> {
     super.initState();
     updateNotification();
     timer = Timer.periodic(
-      Duration(seconds: 10),
+      Duration(seconds: 1),
       (_) {
         updateNotification();
       },
@@ -91,26 +91,28 @@ class _GroupTileState extends State<GroupTile> {
                         .doc(auth.currentUser!.uid)
                         .get()
                         .then(
-                      (value) {
+                      (value) async {
                         if (!value.exists) {
-                          value.reference.set({
+                          await value.reference.set({
                             'ref': widget.userData.reference,
                             'seenAt': Timestamp.now(),
                           });
+                          updateNotification();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => GroupChat(
+                                chats: message.data!,
+                                user: widget.userData,
+                                group: widget.community,
+                              ),
+                            ),
+                          );
                         }
                       },
                     );
                   }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => GroupChat(
-                        chats: message.data!,
-                        user: widget.userData,
-                        group: widget.community,
-                      ),
-                    ),
-                  );
+
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
