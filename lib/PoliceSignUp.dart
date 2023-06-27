@@ -1,22 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mahikav/components/buttons/dropdown_text_field.dart';
 import 'package:mahikav/components/text_form_field.dart';
 import 'package:mahikav/home_page.dart';
-import 'package:mahikav/otp_page.dart';
+import 'package:mahikav/otp_page.dart'
 
 import 'components/buttons/filled_buttons.dart';
-import 'constants.dart';
 
 class PoliceSignUp extends StatefulWidget {
   const PoliceSignUp({Key? key}) : super(key: key);
 
   @override
-  State<PoliceSignUp> createState() => _StudentSignUp();
+  State<PoliceSignUp> createState() => _PoliceSignUp();
 }
 
-class _StudentSignUp extends State<PoliceSignUp>
+class _PoliceSignUp extends State<PoliceSignUp>
     with SingleTickerProviderStateMixin {
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();

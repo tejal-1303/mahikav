@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:mahikav/components/text_form_field.dart';
 
 import 'components/buttons/dropdown_text_field.dart';
 import 'components/buttons/filled_buttons.dart';
+import 'components/custom_icon_icons.dart';
 import 'constants.dart';
 import 'home_page.dart';
 import 'otp_page.dart';
@@ -221,6 +223,34 @@ class _StudentSignUp extends State<StudentSignUp>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:
+       Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Colors.red.shade900,
+            child: Icon(
+              CustomIcon.mic,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          FloatingActionButton(
+            backgroundColor: Colors.green,
+            child: Icon(
+              Icons.call,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              await FlutterPhoneDirectCaller.callNumber(
+                  '+917021051913');
+            },
+          ),
+        ],
+      ),
       appBar: AppBar(
         bottom: TabBar(
           controller: tabCtrl,
@@ -241,6 +271,14 @@ class _StudentSignUp extends State<StudentSignUp>
               (index) =>
               SafeArea(
                 child: ListView(
+          children: [
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+
                   children: [
                     Form(
                       key: _formKey,
