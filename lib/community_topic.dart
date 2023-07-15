@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mahikav/first_page.dart';
 
 import 'add_college_admin_function.dart';
 import 'components/custom_icon_icons.dart';
@@ -65,11 +66,20 @@ class _CommunitiesTopicListState extends State<CommunitiesTopicList> {
               actions: [
                 if (user.hasData && user.data!['category'] == 'Member')
                   IconButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.notifications),
-                  )
+                  ),
+                IconButton(
+                  onPressed: () async {
+                    await auth.signOut();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => FirstPage()),
+                      (route) => false,
+                    );
+                  },
+                  icon: Icon(Icons.logout_rounded),
+                )
               ],
             ),
             body: StreamBuilder<QuerySnapshot>(

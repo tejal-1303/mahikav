@@ -8,6 +8,7 @@ import 'package:mahikav/otp_page.dart';
 
 import 'components/custom_icon_icons.dart';
 import 'components/text_form_field.dart';
+import 'emergency_buttons.dart';
 
 class LoginWithPhone extends StatefulWidget {
   const LoginWithPhone({Key? key}) : super(key: key);
@@ -29,34 +30,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      floatingActionButton:
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Colors.red.shade900,
-            child: Icon(
-              CustomIcon.mic,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            backgroundColor: Colors.green,
-            child: Icon(
-              Icons.call,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              await FlutterPhoneDirectCaller.callNumber(
-                  '+917021051913');
-            },
-          ),
-        ],
-      ),
+      floatingActionButton: EmergencyButtons(),
       body: Form(
         key: _formKey,
         child: Padding(

@@ -39,32 +39,32 @@ class _StudentSignUp extends State<StudentSignUp>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Colors.red.shade900,
-            child: Icon(
-              CustomIcon.mic,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            backgroundColor: Colors.green,
-            child: Icon(
-              Icons.call,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              await FlutterPhoneDirectCaller.callNumber('+917021051913');
-            },
-          ),
-        ],
-      ),
+      // floatingActionButton: Column(
+      //   mainAxisSize: MainAxisSize.min,
+      //   children: [
+      //     FloatingActionButton(
+      //       backgroundColor: Colors.red.shade900,
+      //       child: Icon(
+      //         CustomIcon.mic,
+      //         color: Colors.white,
+      //       ),
+      //       onPressed: () {},
+      //     ),
+      //     SizedBox(
+      //       height: 10,
+      //     ),
+      //     FloatingActionButton(
+      //       backgroundColor: Colors.green,
+      //       child: Icon(
+      //         Icons.call,
+      //         color: Colors.white,
+      //       ),
+      //       onPressed: () async {
+      //         await FlutterPhoneDirectCaller.callNumber('+917021051913');
+      //       },
+      //     ),
+      //   ],
+      // ),
       appBar: AppBar(
         bottom: TabBar(
           controller: tabCtrl,
@@ -92,126 +92,115 @@ class _StudentSignUp extends State<StudentSignUp>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Form(
-                          key: _formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (index == 0)
-                                  CustomTextFormField(
-                                    label: 'Email ID',
-                                    controller: emailCtrl,
-                                    hint: 'abc@example.com',
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return 'Field is Required';
-                                      }
-                                      return errorText;
-                                    },
-                                  ),
-                                if (index == 0)
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                CustomTextFormField(
-                                  label: 'Phone No.',
-                                  controller: phoneCtrl,
-                                  hint: '00000 00000',
-                                  validator: (val) {
-                                    if (val == null || val.isEmpty) {
-                                      return 'Field is Required';
-                                    }
-                                    return errorText;
-                                  },
-                                ),
-                                SizedBox(height: 10),
-                                CustomTextFormField(
-                                  label: 'Member ID',
-                                  controller: cellID,
-                                  validator: (val) {
-                                    if (val == null || val.isEmpty) {
-                                      return 'Field is Required';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 10),
-                                StreamBuilder<QuerySnapshot>(
-                                    stream: firestore
-                                        .collection('colleges')
-                                        .orderBy('collegeAddress')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      return CustomDropDownField(
-                                        label: 'College Address',
-                                        controller: collegeAddrCtrl,
-                                        listItems: snapshot.hasData
-                                            ? List.generate(
-                                                snapshot.data!.size,
-                                                (i) => snapshot.data!.docs[i]
-                                                    ['collegeAddress'],
-                                              )
-                                            : [],
-                                        errorText: postError,
-                                      );
-                                    }),
-                                CustomTextFormField(
-                                  label: 'Name',
-                                  controller: nameCtrl,
-                                  validator: (val) {
-                                    if (val == null || val.isEmpty) {
-                                      return 'Field is Required';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 10),
-                                CustomTextFormField(
-                                  label: 'Aadhar Card No.',
-                                  controller: idProofCtrl,
-                                  hint: 'Eg.Aadhar Card, Pan Card etc... ',
-                                  validator: (val) {
-                                    if (val == null || val.isEmpty) {
-                                      return 'Field is Required';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                if (index == 0) SizedBox(height: 10),
-                                if (index == 0)
-                                  CustomTextFormField(
-                                    label: 'Password',
-                                    controller: passCtrl,
-                                    isPassword: true,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return 'Field is Required';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                if (index == 0) SizedBox(height: 10),
-                                if (index == 0)
-                                  CustomTextFormField(
-                                    label: 'Confirm Password',
-                                    controller: confPassCtrl,
-                                    isPassword: true,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return 'Field is Required';
-                                      } else if (val != passCtrl.text) {
-                                        return 'Password Doesn\'t Match';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                // SizedBox(height: 20),
-                              ],
-                            ),
+                        if (index == 0)
+                          CustomTextFormField(
+                            label: 'Email ID',
+                            controller: emailCtrl,
+                            hint: 'abc@example.com',
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Field is Required';
+                              }
+                              return errorText;
+                            },
                           ),
-                        )
+                        if (index == 0)
+                          SizedBox(
+                            height: 10,
+                          ),
+                        CustomTextFormField(
+                          label: 'Phone No.',
+                          controller: phoneCtrl,
+                          hint: '00000 00000',
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Field is Required';
+                            }
+                            return errorText;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        CustomTextFormField(
+                          label: 'Member ID',
+                          controller: cellID,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Field is Required';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        StreamBuilder<QuerySnapshot>(
+                            stream: firestore
+                                .collection('colleges')
+                                .orderBy('collegeAddress')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              return CustomDropDownField(
+                                label: 'College Address',
+                                controller: collegeAddrCtrl,
+                                listItems: snapshot.hasData
+                                    ? List.generate(
+                                        snapshot.data!.size,
+                                        (i) => snapshot.data!.docs[i]
+                                            ['collegeAddress'],
+                                      )
+                                    : [],
+                                errorText: postError,
+                              );
+                            }),
+                        CustomTextFormField(
+                          label: 'Name',
+                          controller: nameCtrl,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Field is Required';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 10),
+                        CustomTextFormField(
+                          label: 'Aadhar Card No.',
+                          controller: idProofCtrl,
+                          hint: 'Eg.Aadhar Card, Pan Card etc... ',
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Field is Required';
+                            }
+                            return null;
+                          },
+                        ),
+                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0)
+                          CustomTextFormField(
+                            label: 'Password',
+                            controller: passCtrl,
+                            isPassword: true,
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Field is Required';
+                              }
+                              return null;
+                            },
+                          ),
+                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0)
+                          CustomTextFormField(
+                            label: 'Confirm Password',
+                            controller: confPassCtrl,
+                            isPassword: true,
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Field is Required';
+                              } else if (val != passCtrl.text) {
+                                return 'Password Doesn\'t Match';
+                              }
+                              return null;
+                            },
+                          ),
+                        // SizedBox(height: 20),
                       ],
                     ),
                   ),

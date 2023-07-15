@@ -23,7 +23,7 @@ class GroupTile extends StatefulWidget {
 }
 
 class _GroupTileState extends State<GroupTile> {
-  updateNotification() async {
+  Future updateNotification() async {
     notifications = 0;
     await widget.community.reference
         .collection('messages')
@@ -54,8 +54,8 @@ class _GroupTileState extends State<GroupTile> {
     updateNotification();
     timer = Timer.periodic(
       Duration(seconds: 1),
-      (_) {
-        updateNotification();
+      (_) async {
+        await updateNotification();
       },
     );
   }
@@ -83,10 +83,10 @@ class _GroupTileState extends State<GroupTile> {
                 tileColor: (notifications == 0) ? Colors.white : kColorLight,
                 // clipBehavior: Clip.hardEdge,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                onTap: () {
+                onTap: () async {
                   for (QueryDocumentSnapshot z in message.data!.docs) {
                     if (z['sentBy'].id == auth.currentUser!.uid) continue;
-                    z.reference
+                    await z.reference
                         .collection('seen')
                         .doc(auth.currentUser!.uid)
                         .get()
@@ -97,22 +97,25 @@ class _GroupTileState extends State<GroupTile> {
                             'ref': widget.userData.reference,
                             'seenAt': Timestamp.now(),
                           });
-                          updateNotification();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => GroupChat(
-                                chats: message.data!,
-                                user: widget.userData,
-                                group: widget.community,
-                              ),
-                            ),
-                          );
                         }
                       },
                     );
                   }
-
+                  await updateNotification().then(
+                    (value) {
+                      setState(() {});
+                      return Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => GroupChat(
+                            chats: message.data!,
+                            user: widget.userData,
+                            group: widget.community,
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -182,7 +185,7 @@ class _GroupTileState extends State<GroupTile> {
                         shape: const CircleBorder(),
                         color: kColorDark,
                         child: Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             '$notifications',
                             style: GoogleFonts.poppins(

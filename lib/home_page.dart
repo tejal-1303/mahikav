@@ -7,6 +7,7 @@ import 'package:mahikav/components/pages/pending_verification.dart';
 import 'add_place_admin_func.dart';
 import 'community_topic.dart';
 import 'components/custom_icon_icons.dart';
+import 'components/emergency_buttons.dart';
 import 'constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,33 +29,7 @@ class _HomePageState extends State<HomePage> {
             return Scaffold(
               floatingActionButton:
               userData.hasData && userData.data!['category'] == 'Member'
-                  ? Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  FloatingActionButton(
-                    backgroundColor: Colors.red.shade900,
-                    child: Icon(
-                      CustomIcon.mic,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FloatingActionButton(
-                    backgroundColor: Colors.green,
-                    child: Icon(
-                      Icons.call,
-                      color: Colors.white,
-                    ),
-                    onPressed: () async {
-                      await FlutterPhoneDirectCaller.callNumber(
-                          '+917021051913');
-                    },
-                  ),
-                ],
-              )
+                  ? EmergencyButtons()
                   : null,
               appBar: AppBar(
                 title: const Text('Communities'),

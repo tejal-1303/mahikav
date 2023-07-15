@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:mahikav/components/emergency_buttons.dart';
 
 import 'components/buttons/filled_buttons.dart';
 import 'components/custom_icon_icons.dart';
@@ -19,34 +20,7 @@ class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Colors.red.shade900,
-            child: Icon(
-              CustomIcon.mic,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            backgroundColor: Colors.green,
-            child: Icon(
-              Icons.call,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              await FlutterPhoneDirectCaller.callNumber(
-                  '+917021051913');
-            },
-          ),
-        ],
-      ),
+      floatingActionButton: EmergencyButtons(),
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
@@ -149,24 +123,28 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                 ],
               ),
-              if ((isPolice != null && isPolice!) ||
-                  (isMember != null && isMember!))
-                CustomFilledButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => LoginSignUp(
-                          isPolice: isPolice!,
-                        ),
-                      ),
-                    );
-                  },
-                  label: 'Continue',
-                ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(10),
+        child:
+            ((isPolice != null && isPolice!) || (isMember != null && isMember!))
+                ? CustomFilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => LoginSignUp(
+                            isPolice: isPolice!,
+                          ),
+                        ),
+                      );
+                    },
+                    label: 'Continue',
+                  )
+                : null,
       ),
     );
   }

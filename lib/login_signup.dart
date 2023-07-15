@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:mahikav/components/text_form_field.dart';
 import 'package:mahikav/home_page.dart';
 import 'package:mahikav/login_with_phone.dart';
@@ -9,7 +8,7 @@ import 'package:mahikav/login_with_phone.dart';
 import 'PoliceSignUp.dart';
 import 'StudentSignUp.dart';
 import 'components/buttons/filled_buttons.dart';
-import 'components/custom_icon_icons.dart';
+import 'components/emergency_buttons.dart';
 import 'constants.dart';
 
 class LoginSignUp extends StatefulWidget {
@@ -29,34 +28,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Colors.red.shade900,
-            child: Icon(
-              CustomIcon.mic,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            backgroundColor: Colors.green,
-            child: Icon(
-              Icons.call,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              await FlutterPhoneDirectCaller.callNumber(
-                  '+917021051913');
-            },
-          ),
-        ],
-      ),
+      floatingActionButton: EmergencyButtons(),
       appBar: AppBar(),
       body: SafeArea(
         child: ListView(
@@ -158,9 +130,13 @@ class _LoginSignUpState extends State<LoginSignUp> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => LoginWithPhone()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => LoginWithPhone()));
                       },
-                    ),SizedBox(height: 20),
+                    ),
+                    SizedBox(height: 20),
                     CupertinoButton(
                       child: Text(
                         'Forgot Password?',

@@ -5,6 +5,7 @@ import 'package:mahikav/home_page.dart';
 
 import 'firebase_options.dart';
 import 'first_page.dart';
+import 'intro_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
               return const HomePage();
             }
           }
-          return const FirstPage();
+          return const LogoPage();
         }
       ),
     );

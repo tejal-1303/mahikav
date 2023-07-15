@@ -87,6 +87,12 @@ class _OTPPageState extends State<OTPPage> {
                       controller: controllers[index],
                       // focusNode: focusNode[index],
                       onChanged: (value) {
+                        if (controllers.length > 1 && index < 5) {
+                          controllers[index + 1].text =
+                              controllers[index].text.substring(index + 1);
+                          setState(() {});
+                          controllers[index].text = controllers[index + 1].text.substring(index,index + 1);
+                        }
                         if (index == 5) {
                           FocusScope.of(context).unfocus();
                           continueFunction();
@@ -157,18 +163,18 @@ class _OTPPageState extends State<OTPPage> {
 
     // Sign the user in (or link) with the credential
     await FirebaseAuth.instance.signInWithCredential(credential);
-    if(widget.data!=null) {
+    if (widget.data != null) {
       await firestore
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .set(widget.data!);
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .set(widget.data!);
     }
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
         builder: (_) => const HomePage(),
       ),
-        (_) => false,
+      (_) => false,
     );
   }
 }
