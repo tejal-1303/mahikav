@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:mahikav/components/text_form_field.dart';
 
 import 'components/buttons/dropdown_text_field.dart';
 import 'components/buttons/filled_buttons.dart';
-import 'components/custom_icon_icons.dart';
 import 'constants.dart';
 import 'home_page.dart';
 import 'otp_page.dart';
@@ -68,7 +66,7 @@ class _StudentSignUp extends State<StudentSignUp>
       appBar: AppBar(
         bottom: TabBar(
           controller: tabCtrl,
-          tabs: [
+          tabs: const [
             Tab(
               text: 'Using Email',
             ),
@@ -105,7 +103,7 @@ class _StudentSignUp extends State<StudentSignUp>
                             },
                           ),
                         if (index == 0)
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         CustomTextFormField(
@@ -119,7 +117,7 @@ class _StudentSignUp extends State<StudentSignUp>
                             return errorText;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomTextFormField(
                           label: 'Member ID',
                           controller: cellID,
@@ -130,7 +128,7 @@ class _StudentSignUp extends State<StudentSignUp>
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         StreamBuilder<QuerySnapshot>(
                             stream: firestore
                                 .collection('colleges')
@@ -160,7 +158,7 @@ class _StudentSignUp extends State<StudentSignUp>
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomTextFormField(
                           label: 'Aadhar Card No.',
                           controller: idProofCtrl,
@@ -172,7 +170,7 @@ class _StudentSignUp extends State<StudentSignUp>
                             return null;
                           },
                         ),
-                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0) const SizedBox(height: 10),
                         if (index == 0)
                           CustomTextFormField(
                             label: 'Password',
@@ -185,7 +183,7 @@ class _StudentSignUp extends State<StudentSignUp>
                               return null;
                             },
                           ),
-                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0) const SizedBox(height: 10),
                         if (index == 0)
                           CustomTextFormField(
                             label: 'Confirm Password',
@@ -211,7 +209,7 @@ class _StudentSignUp extends State<StudentSignUp>
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: CustomFilledButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
@@ -224,7 +222,7 @@ class _StudentSignUp extends State<StudentSignUp>
                 'name': nameCtrl.text,
                 'email': emailCtrl.text,
                 'phoneNo': phoneCtrl.text,
-                'category': 'Police',
+                'category': 'Member',
                 'IDProof': idProofCtrl.text,
                 'city': 'Gwalior',
                 'state': 'Madhya Pradesh',
@@ -255,7 +253,7 @@ class _StudentSignUp extends State<StudentSignUp>
                     });
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => HomePage()),
+                      MaterialPageRoute(builder: (_) => const HomePage()),
                       (route) => false,
                     );
                     // TODO: Add Navigator to HomePage

@@ -53,7 +53,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                       setState(() {});
                       Navigator.pop(context);
                     },
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Text(
                       e,
                       style: GoogleFonts.poppins(
@@ -66,7 +66,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             );
           },
           child: Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -92,7 +92,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Icon(Icons.arrow_drop_down),
+                const Icon(Icons.arrow_drop_down),
               ],
             ),
           ),

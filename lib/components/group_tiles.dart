@@ -53,7 +53,7 @@ class _GroupTileState extends State<GroupTile> {
     super.initState();
     updateNotification();
     timer = Timer.periodic(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
       (_) async {
         await updateNotification();
       },
@@ -143,7 +143,7 @@ class _GroupTileState extends State<GroupTile> {
                                           auth.currentUser!.uid)
                                       ? 'You: '
                                       : '') +
-                                  snapshot.data!['message'],
+                                  (snapshot.data!['message'].isEmpty ? 'Audio/video' : snapshot.data!['message']),
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
@@ -166,7 +166,7 @@ class _GroupTileState extends State<GroupTile> {
                           ],
                         );
                       }
-                      return Text('No Messages');
+                      return const Text('No Messages');
                     }),
                 title: Text(
                   widget.community['isGeneral']

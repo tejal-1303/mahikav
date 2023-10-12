@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:mahikav/components/emergency_buttons.dart';
 
 import 'components/buttons/filled_buttons.dart';
-import 'components/custom_icon_icons.dart';
 import 'login_signup.dart';
 
 class FirstPage extends StatefulWidget {

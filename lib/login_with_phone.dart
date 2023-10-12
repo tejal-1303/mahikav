@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:mahikav/components/buttons/filled_buttons.dart';
 import 'package:mahikav/constants.dart';
 import 'package:mahikav/otp_page.dart';
 
-import 'components/custom_icon_icons.dart';
+import 'components/emergency_buttons.dart';
 import 'components/text_form_field.dart';
-import 'emergency_buttons.dart';
 
 class LoginWithPhone extends StatefulWidget {
   const LoginWithPhone({Key? key}) : super(key: key);

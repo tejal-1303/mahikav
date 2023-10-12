@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mahikav/home_page.dart';
 
 import 'firebase_options.dart';
-import 'first_page.dart';
 import 'intro_page.dart';
 
 void main() async {
@@ -18,12 +17,11 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Mahika',
       theme: ThemeData(
         useMaterial3: true,
       ),

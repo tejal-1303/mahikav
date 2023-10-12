@@ -15,7 +15,7 @@ class CustomFilledButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: kColorDark,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
+          side: const BorderSide(
             width: 2,
             color: kColorDark,
           ),
@@ -27,7 +27,7 @@ class CustomFilledButton extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Text(
           label,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
       ),
     );
@@ -47,7 +47,7 @@ class CustomOutlineButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: kColorLight,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: kColorDark, width: 2),
+          side: const BorderSide(color: kColorDark, width: 2),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
@@ -56,7 +56,7 @@ class CustomOutlineButton extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             color: kColorDark,
           ),

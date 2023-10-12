@@ -15,46 +15,55 @@ class AddCollege_Admin extends StatefulWidget {
 
 class _AddCollege_AdminState extends State<AddCollege_Admin> {
   final collegeName = TextEditingController();
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add College'),
+        title: const Text('Add College'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CustomTextFormField(
               label: 'College Name',
               controller: collegeName,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: CustomFilledButton(
-          onPressed: () async {
-            await widget.community.reference.collection('groups').add({
-              'collegeName': collegeName.text,
-              'isGeneral': false,
-              'updatedAt': Timestamp.now(),
-            });
-            firestore.collection('colleges').add({
-              'collegeAddress': collegeName.text,
-              'state': widget.community['state'],
-              'city': widget.community['city'],
-            });
-          },
+          onPressed: isClicked
+              ? null
+              : () async {
+                  isClicked = true;
+                  setState(() {});
+                  await widget.community.reference.collection('groups').add({
+                    'collegeName': collegeName.text,
+                    'isGeneral': false,
+                    'updatedAt': Timestamp.now(),
+                  });
+                  firestore.collection('colleges').add({
+                    'collegeAddress': collegeName.text,
+                    'state': widget.community['state'],
+                    'city': widget.community['city'],
+                  }).then((value) {
+                    isClicked = false;
+                    setState(() {});
+                  });
+                  Navigator.pop(context);
+                },
           label: 'Create',
         ),
       ),

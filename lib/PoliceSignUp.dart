@@ -38,7 +38,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
       appBar: AppBar(
         bottom: TabBar(
           controller: tabCtrl,
-          tabs: [
+          tabs: const [
             Tab(
               text: 'Using Email',
             ),
@@ -75,7 +75,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                             },
                           ),
                         if (index == 0)
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         CustomTextFormField(
@@ -89,7 +89,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                             return errorText;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomTextFormField(
                           label: 'Police ID',
                           controller: policeIdCtrl,
@@ -100,11 +100,11 @@ class _PoliceSignUp extends State<PoliceSignUp>
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomDropDownField(
                           label: 'Post',
                           controller: policePostCtrl,
-                          listItems: [
+                          listItems: const [
                             'Constable',
                             'Head Constable',
                             'Assistant Sub-Inspector',
@@ -130,7 +130,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         CustomTextFormField(
                           label: 'Aadhar Card No.',
                           controller: idProofCtrl,
@@ -142,7 +142,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                             return null;
                           },
                         ),
-                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0) const SizedBox(height: 10),
                         if (index == 0)
                           CustomTextFormField(
                             label: 'Password',
@@ -155,7 +155,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                               return null;
                             },
                           ),
-                        if (index == 0) SizedBox(height: 10),
+                        if (index == 0) const SizedBox(height: 10),
                         if (index == 0)
                           CustomTextFormField(
                             label: 'Confirm Password',
@@ -181,7 +181,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: CustomFilledButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
@@ -222,7 +222,7 @@ class _PoliceSignUp extends State<PoliceSignUp>
                     });
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => HomePage()),
+                      MaterialPageRoute(builder: (_) => const HomePage()),
                       (route) => false,
                     );
                     // TODO: Add Navigator to HomePage

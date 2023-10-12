@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mahikav/components/buttons/filled_buttons.dart';
+import 'package:mahikav/components/emergency_buttons.dart';
 import 'package:mahikav/first_page.dart';
+import 'package:mahikav/notifications.dart';
 
 import 'add_college_admin_function.dart';
 import 'components/custom_icon_icons.dart';
@@ -33,52 +36,54 @@ class _CommunitiesTopicListState extends State<CommunitiesTopicList> {
           return Scaffold(
             floatingActionButton:
                 user.hasData && user.data!['category'] == 'Member'
-                    ? Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FloatingActionButton(
-                            backgroundColor: Colors.red.shade900,
-                            child: Icon(
-                              CustomIcon.mic,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {},
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          FloatingActionButton(
-                            backgroundColor: Colors.green,
-                            child: Icon(
-                              Icons.call,
-                              color: Colors.white,
-                            ),
-                            onPressed: () async {
-                              await FlutterPhoneDirectCaller.callNumber(
-                                  '+917021051913');
-                            },
-                          ),
-                        ],
-                      )
+                    ? const EmergencyButtons()
                     : null,
             appBar: AppBar(
-              title: const Text('Gwalior, Madhya Pradesh'),
+              title: Text('${user.data!['city']}, ${user.data!['state']}'),
               actions: [
-                if (user.hasData && user.data!['category'] == 'Member')
+                if (user.hasData && user.data!['category'] != 'Member')
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.notifications),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const Notifications()));
+                    },
+                    icon: const Icon(Icons.notifications),
                   ),
+                IconButton(
+                    onPressed: () {
+                      showGeneralDialog(
+                        context: context,
+                        pageBuilder: (BuildContext context,
+                            Animation<double> animation,
+                            Animation<double> secondaryAnimation) {
+                          return AlertDialog(
+                            title: Text('Nearby locations'),
+                            content: Text('This feature is underway. Wait for the update!'),
+                            actions: [
+                              CustomFilledButton(
+                                onPressed: () {
+                                  Navigator.maybePop(context);
+                                },
+                                label: 'Okay',
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: Icon(Icons.location_on_rounded)),
                 IconButton(
                   onPressed: () async {
                     await auth.signOut();
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => FirstPage()),
+                      MaterialPageRoute(builder: (_) => const FirstPage()),
                       (route) => false,
                     );
                   },
-                  icon: Icon(Icons.logout_rounded),
+                  icon: const Icon(Icons.logout_rounded),
                 )
               ],
             ),

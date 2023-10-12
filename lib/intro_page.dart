@@ -1,7 +1,17 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mahikav/components/buttons/filled_buttons.dart';
 import 'package:mahikav/first_page.dart';
+
+class PushNotification {
+  PushNotification({
+    this.title,
+    this.body,
+  });
+  String? title;
+  String? body;
+}
 
 class LogoPage extends StatefulWidget {
   const LogoPage({Key? key}) : super(key: key);
@@ -11,6 +21,9 @@ class LogoPage extends StatefulWidget {
 }
 
 class _LogoPageState extends State<LogoPage> {
+
+  late final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
   @override
   void initState() {
     // TODO: implement initState

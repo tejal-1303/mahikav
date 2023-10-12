@@ -87,11 +87,16 @@ class _OTPPageState extends State<OTPPage> {
                       controller: controllers[index],
                       // focusNode: focusNode[index],
                       onChanged: (value) {
-                        if (controllers.length > 1 && index < 5) {
-                          controllers[index + 1].text =
-                              controllers[index].text.substring(index + 1);
+                        if (value.length > 1 && index < 5) {
+                          String text = value;
+                          for(int i = 0; i < 6 - index; i++) {
+                            controllers[index + i].text = text.substring(i,i + 1);
+                            FocusScope.of(context).nextFocus();
+                          }
+                          // controllers[index + 1].text =
+                          //     controllers[index].text.substring(index + 1);
                           setState(() {});
-                          controllers[index].text = controllers[index + 1].text.substring(index,index + 1);
+                          // controllers[index].text = controllers[index + 1].text.substring(index,index + 1);
                         }
                         if (index == 5) {
                           FocusScope.of(context).unfocus();
@@ -198,7 +203,7 @@ class OTPBox extends StatelessWidget {
         cursorColor: Colors.black,
         textAlign: TextAlign.center,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
+          // LengthLimitingTextInputFormatter(1),
           FilteringTextInputFormatter.digitsOnly,
         ],
         style: const TextStyle(
@@ -243,13 +248,13 @@ class OTPBox extends StatelessWidget {
         ),
         controller: controller,
         onChanged: (value) {
+          onChanged(value);
           if (value.length == 1) {
             FocusScope.of(context).nextFocus();
           } else {
             FocusScope.of(context).previousFocus();
           }
           print(controller.text);
-          onChanged(value);
         },
       ),
     );
