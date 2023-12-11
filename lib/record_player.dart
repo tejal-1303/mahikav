@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RecordPlayerLocal extends StatefulWidget {
@@ -32,40 +33,52 @@ class _RecordPlayerLocalState extends State<RecordPlayerLocal> {
   String directoryPath = '/storage/emulated/0/SoundRecorder';
 
   void _createFile() async {
-    PermissionStatus status = await Permission.storage.request();
+    // PermissionStatus status = await Permission.storage.request();
     // PermissionStatus status1 = await Permission.accessMediaLocation.request();
-    PermissionStatus status2 = await Permission.manageExternalStorage.request();
-    print('status $status   -> $status2');
-    if (status.isPermanentlyDenied && status2.isPermanentlyDenied) {
-      await openAppSettings();
-    } else if (status.isDenied) {
+    // PermissionStatus status = await Permission.audio.request();
+    var status = await Permission.storage.status;
+    await Permission.audio.request();
+    Directory _directory = Directory("");
+    if (!status.isGranted) {
+      // If not we will ask for permission first
+      await Permission.storage.request();
+      _directory = Directory(directoryPath);
+
+      // await Permission.manageExternalStorage.request();
+    }
+    if (status.isDenied) {
+      _directory = (await getExternalStorageDirectory())!;
+
       print('Permission Denied');
-      return;
     }
-    if (status.isGranted && status2.isGranted) {
-      var _completeFileName = DateTime.now().toUtc().toIso8601String();
-      File('$directoryPath/$_completeFileName')
-          .create(recursive: true)
-          .then((File file) async {
-        //write to file
-        Uint8List bytes = await file.readAsBytes();
-        file.writeAsBytes(bytes);
-        print(file.path);
-      });
-    }
+    print(_directory.path);
+    // print('status $status   -> $status2');
+
+    // if (status.isGranted) {
+    var _completeFileName = DateTime.now().toUtc().toIso8601String();
+    final exPath = _directory.path;
+    await Directory(exPath).create(recursive: true);
+
+    File file = File(widget.url! ?? "");
+    //write to file
+    Uint8List bytes = await file.readAsBytes();
+    File writeFile = File("$exPath/$_completeFileName$fileExtension");
+    await writeFile.writeAsBytes(bytes);
+    print(writeFile.path);
+    // }
   }
 
-  void _createDirectory() async {
-    bool isDirectoryCreated = await Directory(directoryPath).exists();
-    if (!isDirectoryCreated) {
-      Directory(directoryPath)
-          .create()
-          // The created directory is returned as a Future.
-          .then((Directory directory) {
-        print(directory.path);
-      });
-    }
-  }
+  // void _createDirectory() async {
+  //   bool isDirectoryCreated = await Directory(directoryPath).exists();
+  //   if (!isDirectoryCreated) {
+  //     Directory(directoryPath)
+  //         .create()
+  //         // The created directory is returned as a Future.
+  //         .then((Directory directory) {
+  //       print(directory.path);
+  //     });
+  //   }
+  // }
 
   Future<Position> _determinePosition() async {
     LocationPermission permission;
@@ -115,7 +128,7 @@ class _RecordPlayerLocalState extends State<RecordPlayerLocal> {
     // TODO: implement initState
     super.initState();
     print(widget.url);
-    _createDirectory();
+    // _createDirectory();
     _createFile();
     setAudio();
     // if(widget.isEmergency) {

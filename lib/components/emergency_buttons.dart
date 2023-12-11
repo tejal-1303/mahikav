@@ -37,9 +37,9 @@ class _EmergencyButtonsState extends State<EmergencyButtons> {
   }
 
   Future initRecorder() async {
-    PermissionStatus status1 = await Permission.storage.request();
+    // PermissionStatus status1 = await Permission.storage.request();
     // PermissionStatus status1 = await Permission.accessMediaLocation.request();
-    PermissionStatus status2 = await Permission.manageExternalStorage.request();
+    // PermissionStatus status1 = await Permission.audio.request();
     final status = await Permission.microphone.request();
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
