@@ -1,4 +1,4 @@
-# mahikav
+# mahika
 
 A new Flutter project.
 
