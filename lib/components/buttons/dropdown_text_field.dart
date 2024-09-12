@@ -53,16 +53,12 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
                       setState(() {});
                       Navigator.pop(context);
                     },
-                    padding: EdgeInsets.all(15),
-                    child: Row(
-                      children: [
-                        Text(
-                          e,
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      e,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   );
                 }).toList(),
@@ -70,7 +66,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             );
           },
           child: Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
@@ -81,19 +77,22 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.controller.text.isEmpty
-                      ? 'Select One'
-                      : widget.controller.text,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: widget.controller.text.isEmpty
-                        ? Colors.grey.shade400
-                        : Colors.black,
+                Flexible(
+                  child: Text(
+                    widget.controller.text.isEmpty
+                        ? 'Select One'
+                        : widget.controller.text,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: widget.controller.text.isEmpty
+                          ? Colors.grey.shade400
+                          : Colors.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Icon(Icons.arrow_drop_down),
+                const Icon(Icons.arrow_drop_down),
               ],
             ),
           ),

@@ -15,56 +15,66 @@ class AddPlace_Admin extends StatefulWidget {
 class _AddPlace_AdminState extends State<AddPlace_Admin> {
   final cityCtrl = TextEditingController();
   final stateCtrl = TextEditingController();
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Community'),
+        title: const Text('Create Community'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CustomTextFormField(
               label: 'City',
               controller: cityCtrl,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CustomTextFormField(
               label: 'State',
               controller: stateCtrl,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: CustomFilledButton(
-          onPressed: () {
-            firestore.collection('communities').add({
-              'city': cityCtrl.text,
-              'state': stateCtrl.text,
-            }).then(
-              (value) => value.collection('groups').add({
-                'isGeneral': true,
-                'updatedAt': Timestamp.now(),
-              }),
-            );
-          },
+          onPressed: isClicked
+              ? null
+              : () async {
+                  isClicked = true;
+                  setState(() {});
+                  await firestore.collection('communities').add({
+                    'city': cityCtrl.text,
+                    'state': stateCtrl.text,
+                  }).then(
+                    (value) async {
+                      await value.collection('groups').add({
+                      'isGeneral': true,
+                      'updatedAt': Timestamp.now(),
+                    }).then((value) {
+                        isClicked = false;
+                        setState(() {});
+                      });
+                    },
+                  );
+                  Navigator.pop(context);
+                },
           label: 'Create',
         ),
       ),
     );
-    ;
   }
 }
